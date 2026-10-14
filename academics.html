@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Mukadam Zakariya">
+    <!-- Official Institutional Stylesheet (Warm Sandstone & Champagne Redesign) -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Official Institutional Script -->
+    <script src="script.js" defer></script>
+    <meta name="description"
+        content="Academic programs, curriculum, subject combinations, and syllabus details for Arts, Commerce, and Science at Fajandar Junior College, Vahoor.">
+    <meta name="keywords" content="Fajandar Academics, Arts Stream, Commerce Stream, Science Stream, HSC Curriculum, Raigad">
+    <title>Academics | Fajandar Junior College, Vahoor</title>
+</head>
+
+<body>
+    <!-- Cinematic Scroll-Linked 3D Golden Ribbon Background Canvas -->
+    <div class="ribbon-canvas-wrapper" id="ribbon-canvas-wrapper" aria-hidden="true">
+        <canvas id="ribbon-canvas"></canvas>
+    </div>
+    <!-- Site Header & Navigation (Reference Mockup Specification) -->
+    <header class="site-header" id="site-header">
+        <div class="header-container">
+            <a href="index.html" class="header-logo-brand" aria-label="Fajandar Junior College, Vahoor">
+                <div class="logo-emblem">
+                    <svg viewBox="0 0 40 40" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="18" fill="#B85D19" stroke="#E9C46A" stroke-width="1.5"/>
+                        <path d="M20 9L9 15L20 21L31 15L20 9Z" fill="#FFF9F2"/>
+                        <path d="M13 18.5V26.5C13 28 16 31 20 31C24 31 27 28 27 26.5V18.5" stroke="#FFF9F2" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M31 15V24" stroke="#FFF9F2" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">FAJANDAR</span>
+                    <span class="brand-subtitle">JUNIOR COLLEGE, VAHOOR</span>
+                </div>
+            </a>
+
+            <!-- Global Navigation Bar -->
+            <nav class="main-navigation" id="main-navigation" aria-label="Main Navigation">
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">About College</a></li>
+                    <li class="nav-item has-submenu current-page">
+                        <a href="academics.html" class="nav-link active">Academics <span class="dropdown-caret">▾</span></a>
+                        <ul class="submenu">
+                            <li class="submenu-item"><a href="academics.html#arts-stream" class="submenu-link">Arts Stream</a></li>
+                            <li class="submenu-item"><a href="academics.html#commerce-stream" class="submenu-link">Commerce Stream</a></li>
+                            <li class="submenu-item"><a href="academics.html#science-stream" class="submenu-link">Science Stream</a></li>
+                            <li class="submenu-item"><a href="academics.html#general-academics" class="submenu-link">Academic Information</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="staff.html" class="nav-link">Staff &amp; Faculty</a></li>
+                    <li class="nav-item"><a href="facilities.html" class="nav-link">Facilities</a></li>
+                    <li class="nav-item"><a href="fees.html" class="nav-link">Fee Structure</a></li>
+                    <li class="nav-item"><a href="campus.html" class="nav-link">Campus &amp; Location</a></li>
+                    <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="help.html" class="nav-link">Help &amp; FAQs</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="header-search-btn" id="header-search-btn" type="button" aria-label="Search website">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="7"/>
+                        <line x1="21" y1="21" x2="16" y2="16"/>
+                    </svg>
+                </button>
+                <a href="contact.html#admission-enquiry" class="btn-enquire">Enquire Now</a>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-navigation">
+                    <span class="menu-icon-bars" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content" id="main-content">
+
+        <!-- Page Introduction Header / Breadcrumbs (Mockup Panel 3) -->
+        <section class="page-header-section" id="page-header" aria-labelledby="page-title">
+            <div class="page-header-container">
+                <nav class="breadcrumb-nav" aria-label="Breadcrumbs">
+                    <ol class="breadcrumb-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li aria-current="page">Academics</li>
+                    </ol>
+                </nav>
+                <h1 id="page-title" class="page-title">Academic Programs &amp; Curriculum</h1>
+                <p class="page-subtitle">Complete higher secondary educational curriculum across Arts, Commerce, and Science streams.</p>
+            </div>
+        </section>
+
+        <!-- Stream Selector Pill Tabs & Showcase Section (Mockup Panel 3) -->
+        <section class="academics-showcase-section" style="padding-top: 0.5rem; padding-bottom: 2.5rem;">
+            <div class="section-container">
+                <nav class="academics-tabs-nav" aria-label="Stream Selection Tabs">
+                    <a href="#arts-stream" class="tab-pill-btn active">Arts Stream (XI &amp; XII)</a>
+                    <a href="#commerce-stream" class="tab-pill-btn">Commerce Stream (XI &amp; XII)</a>
+                    <a href="#science-stream" class="tab-pill-btn">Science Stream (XI &amp; XII)</a>
+                    <a href="#general-academics" class="tab-pill-btn">General Academic Regulations</a>
+                </nav>
+
+                <!-- 3 Column Showcase (Mockup Panel 3) -->
+                <div class="academics-showcase-grid">
+                    <!-- Left: Stream Card -->
+                    <div class="stream-primary-card">
+                        <div class="stream-big-icon">
+                            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        </div>
+                        <h3>Arts Stream</h3>
+                        <span class="stream-discipline-tag">Humanities &amp; Social Sciences</span>
+                        <p>
+                            The Arts stream cultivates critical thinking, literary appreciation, social awareness, and ethical perspectives. Students explore human culture, society, languages, and history under guided academic mentorship.
+                        </p>
+                        <div class="stream-actions">
+                            <a href="#arts-subjects" class="btn btn-primary" style="font-size: 0.88rem; padding: 0.55rem 1.15rem;">View Subjects &rarr;</a>
+                            <a href="#arts-classes" class="btn btn-secondary" style="font-size: 0.88rem; padding: 0.55rem 1.15rem;">Option Structure</a>
+                        </div>
+                    </div>
+
+                    <!-- Center: Visual Frame -->
+                    <div class="stream-visual-frame">
+                        <div style="text-align: center; padding: 1.5rem;">
+                            <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-terracotta); margin: 0 auto 1rem auto;">
+                                <circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/>
+                            </svg>
+                            <h4 style="font-size: 1.15rem; color: var(--color-heading); margin-bottom: 0.5rem;">Comprehensive HSC Curriculum</h4>
+                            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin: 0;">Maharashtra State Board Aligned</p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Key Highlights Card -->
+                    <div class="stream-highlights-card">
+                        <h4>Key Highlights</h4>
+                        <div class="highlights-list">
+                            <div class="highlight-row">
+                                <div class="dot-icon">&#10003;</div>
+                                <p><strong>Wide range</strong> of approved subject combinations</p>
+                            </div>
+                            <div class="highlight-row">
+                                <div class="dot-icon">&#10003;</div>
+                                <p><strong>Development</strong> of communication and analytical skills</p>
+                            </div>
+                            <div class="highlight-row">
+                                <div class="dot-icon">&#10003;</div>
+                                <p><strong>Guidance</strong> for higher education and career opportunities</p>
+                            </div>
+                            <div class="highlight-row">
+                                <div class="dot-icon">&#10003;</div>
+                                <p><strong>Support</strong> for competitive examinations &amp; board success</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Stream Curriculum Sections -->
+        <section class="stream-details-section" style="padding-top: 1rem;">
+            <div class="section-container">
+
+                <!-- 1. ARTS STREAM DETAILS -->
+                <div class="curriculum-card" id="arts-stream">
+                    <header class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+                        <span class="facility-tag badge-arts">Humanities &amp; Social Sciences</span>
+                        <h2>Arts Stream Curriculum (FYJC &amp; SYJC)</h2>
+                    </header>
+                    <p style="margin-bottom: 1.5rem;">
+                        The Arts stream provides students with an in-depth foundation in humanities, languages, and social disciplines. It develops literary flair, social analytical ability, and ethical reasoning.
+                    </p>
+                    <div class="subject-grid" id="arts-subjects">
+                        <div class="subject-group-box">
+                            <h4>Compulsory Subjects</h4>
+                            <ul class="subject-list">
+                                <li>English (Compulsory Language)</li>
+                                <li>Second Language: [Marathi / Hindi / Urdu — To Be Added]</li>
+                                <li>Environmental Education (EVS)</li>
+                                <li>Health &amp; Physical Education</li>
+                            </ul>
+                        </div>
+                        <div class="subject-group-box">
+                            <h4>Optional / Elective Subjects</h4>
+                            <ul class="subject-list">
+                                <li>History</li>
+                                <li>Geography / Economics</li>
+                                <li>Political Science / Sociology</li>
+                                <li>[Additional Arts Electives — To Be Added]</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. COMMERCE STREAM DETAILS -->
+                <div class="curriculum-card" id="commerce-stream">
+                    <header class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+                        <span class="facility-tag badge-commerce">Business &amp; Financial Studies</span>
+                        <h2>Commerce Stream Curriculum (FYJC &amp; SYJC)</h2>
+                    </header>
+                    <p style="margin-bottom: 1.5rem;">
+                        The Commerce stream prepares students for modern trade, financial literacy, accountancy, economics, and commercial operations, building foundational competence for professional careers.
+                    </p>
+                    <div class="subject-grid" id="commerce-subjects">
+                        <div class="subject-group-box">
+                            <h4>Compulsory Subjects</h4>
+                            <ul class="subject-list">
+                                <li>English (Compulsory Language)</li>
+                                <li>Book Keeping &amp; Accountancy (BK)</li>
+                                <li>Organization of Commerce &amp; Management (OCM)</li>
+                                <li>Economics</li>
+                            </ul>
+                        </div>
+                        <div class="subject-group-box">
+                            <h4>Electives &amp; Compulsory Co-curricular</h4>
+                            <ul class="subject-list">
+                                <li>Secretarial Practice (SP) / Mathematics</li>
+                                <li>Second Language: [Hindi / Marathi / IT — To Be Added]</li>
+                                <li>Environmental Education (EVS)</li>
+                                <li>Health &amp; Physical Education</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. SCIENCE STREAM DETAILS -->
+                <div class="curriculum-card" id="science-stream">
+                    <header class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+                        <span class="facility-tag badge-science">Scientific Research &amp; Technology</span>
+                        <h2>Science Stream Curriculum (FYJC &amp; SYJC)</h2>
+                    </header>
+                    <p style="margin-bottom: 1.5rem;">
+                        The Science stream develops empirical inquiry, analytical methodology, and technical problem-solving through disciplined classroom instruction and dedicated laboratory experiments.
+                    </p>
+                    <div class="subject-grid" id="science-subjects">
+                        <div class="subject-group-box">
+                            <h4>Core Science Disciplines</h4>
+                            <ul class="subject-list">
+                                <li>Physics (Theory &amp; Practical Laboratory)</li>
+                                <li>Chemistry (Theory &amp; Practical Laboratory)</li>
+                                <li>Biology (Theory &amp; Practical Laboratory)</li>
+                                <li>Mathematics &amp; Statistics</li>
+                            </ul>
+                        </div>
+                        <div class="subject-group-box">
+                            <h4>Languages &amp; Core Education</h4>
+                            <ul class="subject-list">
+                                <li>English (Compulsory Language)</li>
+                                <li>Second Language / [IT / CS Option — To Be Added]</li>
+                                <li>Environmental Education (EVS)</li>
+                                <li>Health &amp; Physical Education</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. GENERAL ACADEMIC REGULATIONS -->
+                <div class="curriculum-card" id="general-academics">
+                    <header class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+                        <span class="facility-tag">Institutional Guidelines</span>
+                        <h2>General Academic Regulations &amp; Examination System</h2>
+                    </header>
+                    <div class="subject-grid">
+                        <div class="subject-group-box">
+                            <h4>Attendance &amp; Eligibility</h4>
+                            <ul class="subject-list">
+                                <li>Minimum 75% attendance required in both theory &amp; practicals.</li>
+                                <li>Completion of all term-work, journals, and project files.</li>
+                                <li>Conduct and discipline as per Maharashtra State Board norms.</li>
+                            </ul>
+                        </div>
+                        <div class="subject-group-box">
+                            <h4>Assessment Scheme</h4>
+                            <ul class="subject-list">
+                                <li>Unit Tests and Terminal Examinations in FYJC.</li>
+                                <li>Internal Assessment &amp; Practical Board Exams in SYJC.</li>
+                                <li>Final HSC Board Examination as conducted by MSBSHSE.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" id="site-footer">
+        <div class="footer-container">
+            <div class="footer-main-grid">
+                <div class="footer-col">
+                    <h4>Fajandar Junior College</h4>
+                    <p class="footer-about-p">
+                        Empowering youth in Vahoor, Raigad through value-based higher secondary education across Arts, Commerce, and Science streams.
+                    </p>
+                    <p class="footer-contact-item"><strong>Location:</strong> Vahoor, Raigad, Maharashtra, India</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Institution</a></li>
+                        <li><a href="academics.html">Academic Programs</a></li>
+                        <li><a href="facilities.html">Campus Facilities</a></li>
+                        <li><a href="fees.html">Fee Structure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Academic Streams</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="academics.html#arts-stream">Arts (Class XI &amp; XII)</a></li>
+                        <li><a href="academics.html#commerce-stream">Commerce (Class XI &amp; XII)</a></li>
+                        <li><a href="academics.html#science-stream">Science (Class XI &amp; XII)</a></li>
+                        <li><a href="staff.html">Faculty Directory</a></li>
+                        <li><a href="gallery.html">Exhibitions &amp; Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Enquiries &amp; Support</h4>
+                    <p class="footer-contact-item"><strong>Contact:</strong> [To Be Added]</p>
+                    <p class="footer-contact-item"><strong>Email:</strong> [To Be Added]</p>
+                    <p class="footer-contact-item"><strong>Office Hours:</strong> [To Be Added]</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="contact.html" class="btn btn-primary" style="font-size: 0.85rem; padding: 0.5rem 1rem;">Get in Touch &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-bar">
+                <p class="footer-credit-text">
+                    &copy; 2026 | Designed &amp; Developed by Mukadam Zakariya
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Search Modal -->
+    <div class="search-modal-backdrop" id="search-modal" aria-hidden="true">
+        <div class="search-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="search-modal-title">
+            <div class="search-input-header">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-terracotta);">
+                    <circle cx="11" cy="11" r="7"/>
+                    <line x1="21" y1="21" x2="16" y2="16"/>
+                </svg>
+                <input type="text" class="search-input-box" id="search-input-box" placeholder="Search streams, facilities, fees, faculty..." aria-label="Search website content">
+                <button type="button" class="search-close-btn" id="search-close-btn" aria-label="Close search">&times;</button>
+            </div>
+            <div class="search-results-list" id="search-results-list">
+                <a href="academics.html#arts-stream" class="search-result-item"><strong>Arts Stream:</strong> Class XI &amp; XII Humanities &amp; Social Sciences</a>
+                <a href="academics.html#commerce-stream" class="search-result-item"><strong>Commerce Stream:</strong> Class XI &amp; XII Business &amp; Financial Studies</a>
+                <a href="academics.html#science-stream" class="search-result-item"><strong>Science Stream:</strong> Class XI &amp; XII Pure &amp; Applied Sciences</a>
+                <a href="facilities.html" class="search-result-item"><strong>Campus Facilities:</strong> Laboratories, Library, Classrooms &amp; Sports</a>
+                <a href="fees.html" class="search-result-item"><strong>Fee Structure:</strong> Higher Secondary Fees, Installments &amp; Concessions</a>
+                <a href="staff.html" class="search-result-item"><strong>Faculty Directory:</strong> Teaching Staff &amp; Mentors</a>
+                <a href="contact.html" class="search-result-item"><strong>Contact Desk:</strong> Institutional Address &amp; Admission Enquiries</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
