@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Mukadam Zakariya">
+    <!-- Favicon & Device Icons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <!-- Official Institutional Stylesheet (Warm Sandstone & Champagne Redesign) -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Official Institutional Script -->
+    <script src="script.js" defer></script>
+    <meta name="description"
+        content="Frequently asked questions and student help desk at Fajandar Junior College, Vahoor. Admissions, documents, eligibility, and academic queries.">
+    <meta name="keywords" content="Fajandar FAQs, Junior College Help, FYJC Admissions Queries, Vahoor Contact Desk">
+    <title>Help &amp; FAQs | Fajandar Junior College, Vahoor</title>
+</head>
+
+<body>
+    <!-- Cinematic Scroll-Linked 3D Golden Ribbon Background Canvas -->
+    <div class="ribbon-canvas-wrapper" id="ribbon-canvas-wrapper" aria-hidden="true">
+        <canvas id="ribbon-canvas"></canvas>
+    </div>
+    <!-- Site Header & Navigation (Reference Mockup Specification) -->
+    <header class="site-header" id="site-header">
+        <div class="header-container">
+            <a href="index.html" class="header-logo-brand" aria-label="Fajandar Junior College, Vahoor">
+                <div class="logo-emblem">
+                    <svg viewBox="0 0 40 40" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="18" fill="#B85D19" stroke="#E9C46A" stroke-width="1.5"/>
+                        <path d="M20 9L9 15L20 21L31 15L20 9Z" fill="#FFF9F2"/>
+                        <path d="M13 18.5V26.5C13 28 16 31 20 31C24 31 27 28 27 26.5V18.5" stroke="#FFF9F2" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M31 15V24" stroke="#FFF9F2" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">FAJANDAR</span>
+                    <span class="brand-subtitle">JUNIOR COLLEGE, VAHOOR</span>
+                </div>
+            </a>
+
+            <!-- Global Navigation Bar -->
+            <nav class="main-navigation" id="main-navigation" aria-label="Main Navigation">
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">About College</a></li>
+                    <li class="nav-item has-submenu">
+                        <a href="academics.html" class="nav-link">Academics <span class="dropdown-caret">▾</span></a>
+                        <ul class="submenu">
+                            <li class="submenu-item"><a href="academics.html#arts-stream" class="submenu-link">Arts Stream</a></li>
+                            <li class="submenu-item"><a href="academics.html#commerce-stream" class="submenu-link">Commerce Stream</a></li>
+                            <li class="submenu-item"><a href="academics.html#science-stream" class="submenu-link">Science Stream</a></li>
+                            <li class="submenu-item"><a href="academics.html#general-academics" class="submenu-link">Academic Information</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="staff.html" class="nav-link">Staff &amp; Faculty</a></li>
+                    <li class="nav-item"><a href="facilities.html" class="nav-link">Facilities</a></li>
+                    <li class="nav-item"><a href="fees.html" class="nav-link">Fee Structure</a></li>
+                    <li class="nav-item"><a href="campus.html" class="nav-link">Campus &amp; Location</a></li>
+                    <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li class="nav-item current-page"><a href="help.html" class="nav-link active">Help &amp; FAQs</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="header-search-btn" id="header-search-btn" type="button" aria-label="Search website">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="7"/>
+                        <line x1="21" y1="21" x2="16" y2="16"/>
+                    </svg>
+                </button>
+                <a href="contact.html#admission-enquiry" class="btn-enquire">Enquire Now</a>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-navigation">
+                    <span class="menu-icon-bars" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content" id="main-content">
+
+        <!-- Page Introduction Header / Breadcrumbs -->
+        <section class="page-header-section" id="page-header" aria-labelledby="page-title">
+            <div class="page-header-container">
+                <nav class="breadcrumb-nav" aria-label="Breadcrumbs">
+                    <ol class="breadcrumb-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li aria-current="page">Help &amp; FAQs</li>
+                    </ol>
+                </nav>
+                <h1 id="page-title" class="page-title">Help Center &amp; FAQs</h1>
+                <p class="page-subtitle">Find answers to commonly asked questions regarding admissions, eligibility, academics, and college services.</p>
+            </div>
+        </section>
+
+        <!-- FAQs Accordion Section -->
+        <section class="faq-main-section" style="padding-top: 0.5rem; padding-bottom: 3.5rem;">
+            <div class="section-container">
+                <div class="faq-accordion-container">
+
+                    <!-- FAQ 1 -->
+                    <div class="faq-item">
+                        <button type="button" class="faq-question-btn">
+                            <span>How do I apply for Class XI (FYJC) admission?</span>
+                            <span class="faq-icon-indicator">+</span>
+                        </button>
+                        <div class="faq-answer-panel">
+                            <p>
+                                Admissions to Class XI in Arts, Commerce, and Science are conducted following the Maharashtra State Board 10th (SSC) result declaration. Students can submit the college application form along with their marksheets, school leaving certificate, and necessary documents at the admissions counter.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="faq-item">
+                        <button type="button" class="faq-question-btn">
+                            <span>Which academic streams are offered at the college?</span>
+                            <span class="faq-icon-indicator">+</span>
+                        </button>
+                        <div class="faq-answer-panel">
+                            <p>
+                                Fajandar Junior College offers all three recognized streams with equal academic support:
+                                <strong>Arts</strong> (Humanities &amp; Social Sciences),
+                                <strong>Commerce</strong> (Business, Accountancy &amp; Management), and
+                                <strong>Science</strong> (Physics, Chemistry, Biology &amp; Mathematics).
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="faq-item">
+                        <button type="button" class="faq-question-btn">
+                            <span>What documents are required during admission?</span>
+                            <span class="faq-icon-indicator">+</span>
+                        </button>
+                        <div class="faq-answer-panel">
+                            <ul style="list-style: disc inside; line-height: 1.7;">
+                                <li>Original SSC (Class X) Marksheet and photocopies.</li>
+                                <li>School Leaving Certificate (LC / TC).</li>
+                                <li>Caste Certificate &amp; Domicile Certificate (if applicable).</li>
+                                <li>Passport size photographs and Aadhar card copy.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="faq-item">
+                        <button type="button" class="faq-question-btn">
+                            <span>Are bus transit and transport pass concessions available?</span>
+                            <span class="faq-icon-indicator">+</span>
+                        </button>
+                        <div class="faq-answer-panel">
+                            <p>
+                                Yes. The college facilitates official MSRTC student bus pass verification so students commuting from Vahoor, Mahad, Mangaon, and surrounding villages can travel at subsidized government student rates.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 5 -->
+                    <div class="faq-item">
+                        <button type="button" class="faq-question-btn">
+                            <span>Can fees be paid in installments?</span>
+                            <span class="faq-icon-indicator">+</span>
+                        </button>
+                        <div class="faq-answer-panel">
+                            <p>
+                                Yes. The college administrative office provides a term-wise installment facility upon request to support parents and ensure uninterrupted education for every student.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Still Have Questions Prompt -->
+                <div class="glass-card" style="text-align: center; max-width: 860px; margin: 0 auto; padding: 2.5rem;">
+                    <h3>Still Have Questions?</h3>
+                    <p style="color: var(--color-text-muted); margin-bottom: 1.25rem;">Our admissions and support staff are here to assist you with any inquiries.</p>
+                    <a href="contact.html" class="btn btn-primary">Contact Admissions Helpdesk &rarr;</a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" id="site-footer">
+        <div class="footer-container">
+            <div class="footer-main-grid">
+                <div class="footer-col">
+                    <h4>Fajandar Junior College</h4>
+                    <p class="footer-about-p">
+                        Empowering youth in Vahoor, Raigad through value-based higher secondary education across Arts, Commerce, and Science streams.
+                    </p>
+                    <p class="footer-contact-item"><strong>Location:</strong> Vahoor, Raigad, Maharashtra, India</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Institution</a></li>
+                        <li><a href="academics.html">Academic Programs</a></li>
+                        <li><a href="facilities.html">Campus Facilities</a></li>
+                        <li><a href="fees.html">Fee Structure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Academic Streams</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="academics.html#arts-stream">Arts (Class XI &amp; XII)</a></li>
+                        <li><a href="academics.html#commerce-stream">Commerce (Class XI &amp; XII)</a></li>
+                        <li><a href="academics.html#science-stream">Science (Class XI &amp; XII)</a></li>
+                        <li><a href="staff.html">Faculty Directory</a></li>
+                        <li><a href="gallery.html">Exhibitions &amp; Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Enquiries &amp; Support</h4>
+                    <p class="footer-contact-item"><strong>Contact:</strong> [To Be Added]</p>
+                    <p class="footer-contact-item"><strong>Email:</strong> [To Be Added]</p>
+                    <p class="footer-contact-item"><strong>Office Hours:</strong> [To Be Added]</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="contact.html" class="btn btn-primary" style="font-size: 0.85rem; padding: 0.5rem 1rem;">Get in Touch &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-bar">
+                <p class="footer-credit-text">
+                    &copy; 2026 | Designed &amp; Developed by Mukadam Zakariya
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Search Modal -->
+    <div class="search-modal-backdrop" id="search-modal" aria-hidden="true">
+        <div class="search-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="search-modal-title">
+            <div class="search-input-header">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-terracotta);">
+                    <circle cx="11" cy="11" r="7"/>
+                    <line x1="21" y1="21" x2="16" y2="16"/>
+                </svg>
+                <input type="text" class="search-input-box" id="search-input-box" placeholder="Search streams, facilities, fees, faculty..." aria-label="Search website content">
+                <button type="button" class="search-close-btn" id="search-close-btn" aria-label="Close search">&times;</button>
+            </div>
+            <div class="search-results-list" id="search-results-list">
+                <a href="academics.html#arts-stream" class="search-result-item"><strong>Arts Stream:</strong> Class XI &amp; XII Humanities &amp; Social Sciences</a>
+                <a href="academics.html#commerce-stream" class="search-result-item"><strong>Commerce Stream:</strong> Class XI &amp; XII Business &amp; Financial Studies</a>
+                <a href="academics.html#science-stream" class="search-result-item"><strong>Science Stream:</strong> Class XI &amp; XII Pure &amp; Applied Sciences</a>
+                <a href="facilities.html" class="search-result-item"><strong>Campus Facilities:</strong> Laboratories, Library, Classrooms &amp; Sports</a>
+                <a href="fees.html" class="search-result-item"><strong>Fee Structure:</strong> Higher Secondary Fees, Installments &amp; Concessions</a>
+                <a href="staff.html" class="search-result-item"><strong>Faculty Directory:</strong> Teaching Staff &amp; Mentors</a>
+                <a href="contact.html" class="search-result-item"><strong>Contact Desk:</strong> Institutional Address &amp; Admission Enquiries</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
