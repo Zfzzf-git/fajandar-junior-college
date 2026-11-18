@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clean 3D Iridescent Ribbon Generator & Frame Exporter</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0f1117;
+      color: #e2e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    header {
+      width: 100%;
+      max-width: 960px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 { font-size: 1.25rem; font-weight: 600; color: #fff; }
+    #viewport-container {
+      position: relative;
+      width: 960px;
+      height: 960px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      background: #F7F8FA;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    #controls {
+      width: 100%;
+      max-width: 960px;
+      margin-top: 16px;
+      background: #1e222d;
+      padding: 16px 20px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .row { display: flex; align-items: center; gap: 16px; }
+    .btn {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #2563eb; }
+    .btn:disabled { background: #475569; cursor: not-allowed; }
+    .slider-container { flex: 1; display: flex; align-items: center; gap: 12px; }
+    input[type="range"] { flex: 1; height: 6px; border-radius: 3px; cursor: pointer; }
+    #status-bar {
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+    #progress-fill {
+      height: 8px;
+      background: #10b981;
+      width: 0%;
+      border-radius: 4px;
+      transition: width 0.1s linear;
+    }
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: #334155;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./node_modules/three/build/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>3D Iridescent Ribbon Studio & Exporter (150 Frames)</h1>
+    <div id="status-bar">Ready</div>
+  </header>
+
+  <div id="viewport-container">
+    <canvas id="render-canvas" width="960" height="960"></canvas>
+  </div>
+
+  <div id="controls">
+    <div class="row">
+      <button id="export-btn" class="btn">Start Rendering 150 Frames</button>
+      <div class="slider-container">
+        <label for="scrub-slider">Scroll Progress:</label>
+        <input type="range" id="scrub-slider" min="0" max="1" step="0.005" value="0">
+        <span id="frame-display">Frame 1 / 150</span>
+      </div>
+    </div>
+    <div class="progress-track">
+      <div id="progress-fill"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import * as THREE from 'three';
+
+    const canvas = document.getElementById('render-canvas');
+    const exportBtn = document.getElementById('export-btn');
+    const scrubSlider = document.getElementById('scrub-slider');
+    const frameDisplay = document.getElementById('frame-display');
+    const statusBar = document.getElementById('status-bar');
+    const progressFill = document.getElementById('progress-fill');
+
+    const WIDTH = 960;
+    const HEIGHT = 960;
+
+    // --- SCENE SETUP ---
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xF7F8FA);
+
+    const camera = new THREE.PerspectiveCamera(40, WIDTH / HEIGHT, 0.1, 100);
+    camera.position.set(0, 0, 14);
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      antialias: true,
+      preserveDrawingBuffer: true,
+      powerPreference: 'high-performance'
+    });
+    renderer.setSize(WIDTH, HEIGHT, false);
+    renderer.setPixelRatio(1);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    // --- STUDIO LIGHTING ---
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+    scene.add(ambientLight);
+
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
+    keyLight.position.set(6, 12, 10);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 1024;
+    keyLight.shadow.mapSize.height = 1024;
+    keyLight.shadow.camera.near = 0.5;
+    keyLight.shadow.camera.far = 30;
+    keyLight.shadow.bias = -0.0005;
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0xdbeafe, 1.2);
+    fillLight.position.set(-8, -4, 6);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.DirectionalLight(0xf5d0fe, 1.8);
+    rimLight.position.set(0, 8, -6);
+    scene.add(rimLight);
+
+    // --- STUDIO FLOOR WITH DIFFUSE CONTACT SHADOW ---
+    const shadowGeo = new THREE.PlaneGeometry(35, 35);
+    const shadowMat = new THREE.ShadowMaterial({ opacity: 0.12 });
+    const shadowPlane = new THREE.Mesh(shadowGeo, shadowMat);
+    shadowPlane.position.z = -3.5;
+    shadowPlane.receiveShadow = true;
+    scene.add(shadowPlane);
+
+    // Soft gradient floor plane
+    const floorCanvas = document.createElement('canvas');
+    floorCanvas.width = 512;
+    floorCanvas.height = 512;
+    const fCtx = floorCanvas.getContext('2d');
+    const fGrad = fCtx.createRadialGradient(256, 256, 50, 256, 256, 256);
+    fGrad.addColorStop(0, '#f9fafb');
+    fGrad.addColorStop(0.6, '#f3f4f6');
+    fGrad.addColorStop(1, '#e5e7eb');
+    fCtx.fillStyle = fGrad;
+    fCtx.fillRect(0, 0, 512, 512);
+
+    const floorTex = new THREE.CanvasTexture(floorCanvas);
+    const floorBackdrop = new THREE.Mesh(
+      new THREE.PlaneGeometry(32, 32),
+      new THREE.MeshBasicMaterial({ map: floorTex })
+    );
+    floorBackdrop.position.z = -4.0;
+    scene.add(floorBackdrop);
+
+    // --- COLOR PALETTE & GRADIENT TEXTURE FOR IRIDESCENCE ---
+    // Cyan -> Azure -> Lavender -> Magenta/Rose Pink -> Soft Aqua
+    const gradCanvas = document.createElement('canvas');
+    gradCanvas.width = 1024;
+    gradCanvas.height = 256;
+    const gCtx = gradCanvas.getContext('2d');
+
+    // Horizontal: Along curve length (s: 0 to 1)
+    // Vertical: Across width (v: 0 top edge to 1 bottom edge)
+    const horizGrad = gCtx.createLinearGradient(0, 0, 1024, 0);
+    horizGrad.addColorStop(0.00, '#00d4ff'); // Vibrant Cyan
+    horizGrad.addColorStop(0.20, '#2563eb'); // Azure Blue
+    horizGrad.addColorStop(0.40, '#a855f7'); // Lavender
+    horizGrad.addColorStop(0.65, '#ec4899'); // Magenta Pink
+    horizGrad.addColorStop(0.85, '#06b6d4'); // Bright Aqua
+    horizGrad.addColorStop(1.00, '#818cf8'); // Soft Indigo
+    gCtx.fillStyle = horizGrad;
+    gCtx.fillRect(0, 0, 1024, 256);
+
+    // Overlay soft vertical shading for depth & rim contrast
+    const vertGrad = gCtx.createLinearGradient(0, 0, 0, 256);
+    vertGrad.addColorStop(0.0, 'rgba(255, 255, 255, 0.45)');
+    vertGrad.addColorStop(0.2, 'rgba(255, 255, 255, 0.1)');
+    vertGrad.addColorStop(0.5, 'rgba(0, 0, 0, 0.05)');
+    vertGrad.addColorStop(0.85, 'rgba(255, 255, 255, 0.1)');
+    vertGrad.addColorStop(1.0, 'rgba(15, 23, 42, 0.55)'); // Dark contour edge
+    gCtx.fillStyle = vertGrad;
+    gCtx.fillRect(0, 0, 1024, 256);
+
+    const ribbonTex = new THREE.CanvasTexture(gradCanvas);
+    ribbonTex.wrapS = THREE.ClampToEdgeWrapping;
+    ribbonTex.wrapT = THREE.ClampToEdgeWrapping;
+
+    // --- PHYSICAL MATERIAL (GLASS, TRANSLUCENCY, IRIDESCENCE) ---
+    const ribbonMaterial = new THREE.MeshPhysicalMaterial({
+      map: ribbonTex,
+      color: 0xffffff,
+      roughness: 0.12,
+      metalness: 0.08,
+      transmission: 0.75, // Translucent glass feel
+      ior: 1.48,
+      thickness: 0.45,
+      specularIntensity: 1.0,
+      specularColor: new THREE.Color(0xffffff),
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.08,
+      iridescence: 1.0,
+      iridescenceIOR: 1.34,
+      iridescenceThicknessRange: [100, 450],
+      side: THREE.DoubleSide
+    });
+
+    // Dark sleek rim material for the outer contour edge
+    const rimMaterial = new THREE.MeshBasicMaterial({
+      color: 0x1e293b,
+      transparent: true,
+      opacity: 0.65
+    });
+
+    // --- RIBBON GEOMETRY GENERATION ---
+    // Parametric 3D curve with natural spiral twists
+    function createRibbonGeometry() {
+      const curvePoints = [
+        new THREE.Vector3(-4.8, 5.2, -0.6),
+        new THREE.Vector3(-3.2, 4.0, 0.8),
+        new THREE.Vector3(-1.4, 2.4, 1.8),
+        new THREE.Vector3(0.5, 0.9, 1.5),
+        new THREE.Vector3(2.2, -0.4, 0.6),
+        new THREE.Vector3(3.6, -1.8, -0.4),
+        new THREE.Vector3(2.8, -3.2, -1.2),
+        new THREE.Vector3(0.6, -3.6, -0.5),
+        new THREE.Vector3(-1.8, -3.0, 0.8),
+        new THREE.Vector3(-3.6, -1.6, 1.4),
+        new THREE.Vector3(-4.2, 0.2, 0.6),
+        new THREE.Vector3(-3.2, 2.0, -0.5),
+        new THREE.Vector3(-1.2, 3.4, -1.2),
+        new THREE.Vector3(1.2, 4.0, -0.6),
+        new THREE.Vector3(3.4, 3.5, 0.6),
+        new THREE.Vector3(4.8, 1.8, 1.4),
+        new THREE.Vector3(5.0, -0.5, 0.8),
+        new THREE.Vector3(3.8, -2.4, -0.2),
+        new THREE.Vector3(1.8, -3.8, -1.0)
+      ];
+
+      const curve = new THREE.CatmullRomCurve3(curvePoints, false, 'centripetal', 0.5);
+      const numSegments = 240;
+      const numCross = 16;
+      const baseWidth = 1.35;
+      const thickness = 0.08;
+
+      const vertices = [];
+      const normals = [];
+      const uvs = [];
+      const indices = [];
+
+      // Frenet frames along curve
+      const frames = curve.computeFrenetFrames(numSegments, false);
+
+      for (let i = 0; i <= numSegments; i++) {
+        const u = i / numSegments;
+        const pt = curve.getPointAt(u);
+        const tangent = frames.tangents[i];
+        let normal = frames.normals[i];
+        let binormal = frames.binormals[i];
+
+        // Apply progressive twisting along the ribbon path
+        const twistAngle = u * Math.PI * 3.4 + Math.sin(u * Math.PI * 2.0) * 0.6;
+        const cosT = Math.cos(twistAngle);
+        const sinT = Math.sin(twistAngle);
+
+        const twistedNormal = new THREE.Vector3()
+          .addScaledVector(normal, cosT)
+          .addScaledVector(binormal, sinT)
+          .normalize();
+
+        const twistedBinormal = new THREE.Vector3()
+          .crossVectors(tangent, twistedNormal)
+          .normalize();
+
+        // Width tapering at endpoints
+        const taper = Math.sin(u * Math.PI);
+        const curWidth = baseWidth * (0.4 + 0.6 * Math.pow(taper, 0.4));
+
+        for (let j = 0; j <= numCross; j++) {
+          const v = j / numCross;
+          const offsetW = (v - 0.5) * curWidth;
+
+          // Subtle curve across ribbon cross section
+          const camber = Math.sin(v * Math.PI) * 0.12;
+
+          const vertex = new THREE.Vector3()
+            .copy(pt)
+            .addScaledVector(twistedNormal, offsetW)
+            .addScaledVector(twistedBinormal, camber);
+
+          vertices.push(vertex.x, vertex.y, vertex.z);
+
+          // Approximate normal
+          const vertNormal = new THREE.Vector3().copy(twistedBinormal).normalize();
+          normals.push(vertNormal.x, vertNormal.y, vertNormal.z);
+
+          uvs.push(u, v);
+        }
+      }
+
+      // Build grid faces
+      for (let i = 0; i < numSegments; i++) {
+        for (let j = 0; j < numCross; j++) {
+          const a = i * (numCross + 1) + j;
+          const b = (i + 1) * (numCross + 1) + j;
+          const c = (i + 1) * (numCross + 1) + (j + 1);
+          const d = i * (numCross + 1) + (j + 1);
+
+          indices.push(a, b, d);
+          indices.push(b, c, d);
+        }
+      }
+
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+      geo.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+      geo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+      geo.setIndex(indices);
+      geo.computeVertexNormals();
+
+      return { geometry: geo, curve: curve };
+    }
+
+    const { geometry: ribbonGeo, curve: ribbonCurve } = createRibbonGeometry();
+    const ribbonMesh = new THREE.Mesh(ribbonGeo, ribbonMaterial);
+    ribbonMesh.castShadow = true;
+    ribbonMesh.receiveShadow = true;
+    scene.add(ribbonMesh);
+
+    // --- STEPPED SLATS (COMPLEMENTARY HELIX LOUVRES) ---
+    // Provides the exact faceted crystal fins seen in 3D animation.mp4
+    const numSlabs = 110;
+    const slabGeo = new THREE.BoxGeometry(2.2, 0.42, 0.08);
+    const instancedSlabs = new THREE.InstancedMesh(slabGeo, ribbonMaterial, numSlabs);
+    instancedSlabs.castShadow = true;
+    instancedSlabs.receiveShadow = true;
+
+    const dummy = new THREE.Object3D();
+    const slatFrames = ribbonCurve.computeFrenetFrames(numSlabs, false);
+
+    for (let k = 0; k < numSlabs; k++) {
+      const u = k / (numSlabs - 1);
+      const pt = ribbonCurve.getPointAt(u);
+      const tangent = slatFrames.tangents[k];
+      const normal = slatFrames.normals[k];
+      const binormal = slatFrames.binormals[k];
+
+      const twist = u * Math.PI * 3.4 + Math.sin(u * Math.PI * 2.0) * 0.6;
+      const tNorm = new THREE.Vector3()
+        .addScaledVector(normal, Math.cos(twist))
+        .addScaledVector(binormal, Math.sin(twist))
+        .normalize();
+
+      dummy.position.copy(pt);
+      dummy.up.copy(tNorm);
+      dummy.lookAt(pt.clone().add(tangent));
+      dummy.scale.set(1.0, 1.0, 1.0);
+      dummy.updateMatrix();
+      instancedSlabs.setMatrixAt(k, dummy.matrix);
+    }
+    instancedSlabs.instanceMatrix.needsUpdate = true;
+    scene.add(instancedSlabs);
+
+    // --- ANIMATION / SCROLL CHOREOGRAPHY (4 PHASES) ---
+    // Directly mirrors the motion curve verified in 3D animation.mp4
+    function updateSceneForProgress(progress) {
+      // progress in [0, 1]
+      // 0.0 - 0.28: Hero stage (diagonal posture, upper right center)
+      // 0.28 - 0.60: Features stage (rolls downward, curls bottom-left)
+      // 0.60 - 0.85: Inquiry stage (sweeps upward into top-half)
+      // 0.85 - 1.00: Footer stage (perspective resting loop)
+
+      // Ribbon Group Transformations
+      const rotY = Math.PI * 0.15 - progress * Math.PI * 1.85;
+      const rotX = 0.25 + Math.sin(progress * Math.PI * 1.5) * 0.35;
+      const rotZ = -0.15 + Math.cos(progress * Math.PI * 2.0) * 0.20;
+
+      ribbonMesh.rotation.set(rotX, rotY, rotZ);
+      instancedSlabs.rotation.set(rotX, rotY, rotZ);
+
+      // Trajectory translation matching 3D animation.mp4
+      let posX = 0;
+      let posY = 0;
+      let posZ = 0;
+
+      if (progress < 0.30) {
+        // Hero: shifted right
+        const t = progress / 0.30;
+        posX = 1.2 - t * 1.8;
+        posY = -0.2 + t * 0.6;
+        posZ = 0.5 - t * 0.8;
+      } else if (progress < 0.65) {
+        // Features: dips down-left
+        const t = (progress - 0.30) / 0.35;
+        posX = -0.6 - Math.sin(t * Math.PI) * 1.6;
+        posY = 0.4 - t * 1.8;
+        posZ = -0.3 + t * 1.2;
+      } else if (progress < 0.88) {
+        // Inquiry: swoops up into top-half
+        const t = (progress - 0.65) / 0.23;
+        posX = -0.6 + t * 1.4;
+        posY = -1.4 + t * 2.6;
+        posZ = 0.9 - t * 0.5;
+      } else {
+        // Footer: settles into bottom perspective curve
+        const t = (progress - 0.88) / 0.12;
+        posX = 0.8 - t * 0.5;
+        posY = 1.2 - t * 1.4;
+        posZ = 0.4 - t * 0.4;
+      }
+
+      ribbonMesh.position.set(posX, posY, posZ);
+      instancedSlabs.position.set(posX, posY, posZ);
+
+      // Dynamic light tracking to maintain glorious specular highlights
+      keyLight.position.x = 6 + Math.cos(progress * Math.PI * 2.0) * 3;
+      keyLight.position.y = 12 + Math.sin(progress * Math.PI * 2.0) * 2;
+
+      renderer.render(scene, camera);
+    }
+
+    // Initial render
+    updateSceneForProgress(0);
+
+    // --- INTERACTIVE SCRUBBING ---
+    scrubSlider.addEventListener('input', (e) => {
+      const p = parseFloat(e.target.value);
+      const frameNum = Math.floor(p * 149) + 1;
+      frameDisplay.textContent = `Frame ${frameNum} / 150`;
+      updateSceneForProgress(p);
+    });
+
+    // --- AUTOMATED 150-FRAME EXPORT PIPELINE ---
+    async function runExportPipeline() {
+      exportBtn.disabled = true;
+      scrubSlider.disabled = true;
+      statusBar.textContent = 'Starting render pipeline (150 frames)...';
+
+      const TOTAL_FRAMES = 150;
+      let completed = 0;
+
+      for (let i = 1; i <= TOTAL_FRAMES; i++) {
+        const progress = (i - 1) / (TOTAL_FRAMES - 1);
+        updateSceneForProgress(progress);
+
+        // Capture WebP frame
+        const dataUrl = canvas.toDataURL('image/webp', 0.92);
+        const filename = `frame-${String(i).padStart(3, '0')}.webp`;
+
+        // Send to local Node server
+        try {
+          const resp = await fetch('http://127.0.0.1:3456/save-frame', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filename, data: dataUrl })
+          });
+
+          if (!resp.ok) {
+            throw new Error(`Server returned ${resp.status}`);
+          }
+
+          completed++;
+          const pct = Math.round((completed / TOTAL_FRAMES) * 100);
+          progressFill.style.width = `${pct}%`;
+          statusBar.textContent = `Rendered & Saved: ${filename} (${completed}/${TOTAL_FRAMES})`;
+          frameDisplay.textContent = `Frame ${i} / ${TOTAL_FRAMES}`;
+          scrubSlider.value = progress;
+        } catch (err) {
+          console.error(`Error saving ${filename}:`, err);
+          statusBar.textContent = `Error saving ${filename}: ${err.message}`;
+          exportBtn.disabled = false;
+          scrubSlider.disabled = false;
+          return;
+        }
+
+        // Brief delay to allow browser thread to breathe
+        await new Promise(r => setTimeout(r, 16));
+      }
+
+      statusBar.textContent = 'SUCCESS: All 150 frames successfully rendered and saved to assets/ribbon_frames/!';
+      progressFill.style.background = '#10b981';
+      exportBtn.textContent = 'Rendering Complete (150/150)';
+    }
+
+    exportBtn.addEventListener('click', runExportPipeline);
+
+    // Auto-trigger if loaded with ?auto=true
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('auto') === 'true') {
+      console.log('Auto-triggering export pipeline...');
+      setTimeout(runExportPipeline, 400);
+    }
+
+    // Expose runner globally for automated triggers
+    window.runExportPipeline = runExportPipeline;
+    window.isReady = true;
+  </script>
+</body>
+</html>
