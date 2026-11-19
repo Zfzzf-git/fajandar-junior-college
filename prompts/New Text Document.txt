@@ -344,3 +344,22 @@ background apply kar saku.
 ek minute lekin mai jab bhi bhi antigravity se website me changes karuga to har baar mai uska 
 new backup banata jaise `FAJANDARBACKUP`5 `FAJANDARBACKUP`6  `FAJANDARBACKUP`7  `FAJANDARBACKUP8` iss
  tarah se, to ye automation waali cheez work karegi
+
+
+
+
+
+
+
+ ok abhi ye dekho meri college me total 16 teachers hai jisme 3 lady teachers aur 13 male
+  teachers hai aur jinme se 2 commerce male teachers hai aur commerce and science ke liye 
+  ek ek lady I.T teacher and ek Male I.T teacher hai matlab I.T ke liye 2 teachers ek male 
+  aur ek female aur ye dono commerce and science dono stream ke bachcho ko padhate aur 2 
+  english male teachers hai aur 6  science teachers hai jinme se 2 lady teachers hai aur 4
+   male teachers aur 3 arts teachers hai ye teeno male hai.
+
+
+lekin iss page par sirf 6 hi cards hai aur wo bhi Arts keliye do cards, Commerce  keliye bhi 
+2 cards aur Science ke liye bhi 2 cards. Iss baar humme saare teachers ke liye separate card 
+chahiye matlab total 16 cards with proper stream name aur phir iske baad unsab ki real images
+ bhi apply karege unki qualification deatils ke saath.
