@@ -2148,6 +2148,294 @@ section {
 }
 
 /* --------------------------------------------------------------------------
+   20.5 CAMPUS & LOCATION INTERACTIVE MAP SECTION
+   -------------------------------------------------------------------------- */
+.campus-map-card {
+    background: rgba(255, 255, 255, 0.76);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--glass-shadow);
+    padding: 2.25rem;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow var(--transition-normal);
+}
+
+.campus-map-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-terracotta), var(--color-gold-accent), var(--color-terracotta));
+}
+
+.map-heading-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-top: 0.45rem;
+    margin-bottom: 0.35rem;
+}
+
+.map-pin-icon-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, #f7dfcb, #f0ccb0);
+    border: 1px solid rgba(184, 93, 25, 0.28);
+    color: var(--color-terracotta);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(184, 93, 25, 0.15);
+}
+
+.campus-map-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: 2rem;
+    align-items: stretch;
+    margin-top: 1.5rem;
+}
+
+/* Location Information Card */
+.campus-info-card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(220, 200, 180, 0.45);
+    border-radius: var(--radius-lg);
+    padding: 1.65rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 16px rgba(130, 95, 65, 0.05);
+}
+
+.campus-info-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--color-forest-soft);
+    border: 1px solid var(--color-forest-border);
+    color: var(--color-forest);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 0.22rem 0.75rem;
+    border-radius: var(--radius-pill);
+    margin-bottom: 0.85rem;
+}
+
+.pulse-indicator {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--color-forest);
+    box-shadow: 0 0 0 0 rgba(45, 90, 67, 0.7);
+    animation: campusPulse 2s infinite;
+}
+
+@keyframes campusPulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(45, 90, 67, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(45, 90, 67, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(45, 90, 67, 0);
+    }
+}
+
+.campus-institution-name {
+    font-family: var(--font-heading);
+    font-size: 1.28rem;
+    color: var(--color-heading);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.35;
+}
+
+.campus-full-address {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(220, 200, 180, 0.45);
+}
+
+.info-inline-icon {
+    color: var(--color-terracotta);
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+}
+
+/* Detail Key-Value Rows */
+.location-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin-bottom: 1.5rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.45rem 0.65rem;
+    background: rgba(255, 255, 255, 0.52);
+    border: 1px solid rgba(220, 200, 180, 0.35);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    gap: 0.75rem;
+}
+
+.detail-label {
+    color: var(--color-text-muted);
+    font-weight: 500;
+    font-size: 0.82rem;
+    white-space: nowrap;
+}
+
+.detail-value {
+    color: var(--color-heading);
+    font-weight: 600;
+    text-align: right;
+    word-break: break-word;
+}
+
+.detail-value.highlight-pin {
+    color: var(--color-terracotta);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    background: var(--color-terracotta-soft);
+    padding: 0.1rem 0.5rem;
+    border-radius: var(--radius-xs);
+    border: 1px solid var(--color-terracotta-border);
+}
+
+.detail-value.plus-code {
+    font-family: monospace;
+    font-size: 0.82rem;
+    color: var(--color-terracotta-dark);
+    background: rgba(207, 161, 92, 0.15);
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radius-xs);
+    border: 1px solid var(--color-gold-border);
+}
+
+/* Action Buttons Container */
+.campus-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.85rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(220, 200, 180, 0.45);
+}
+
+.btn-directions {
+    font-weight: 700;
+    gap: 0.6rem;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 15px rgba(184, 93, 25, 0.35);
+}
+
+.btn-directions:hover {
+    box-shadow: 0 6px 20px rgba(184, 93, 25, 0.45);
+}
+
+/* Map Embed Container & Glass Framing */
+.campus-map-embed-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.map-glass-frame {
+    position: relative;
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--color-gold-border);
+    box-shadow: 0 10px 30px rgba(130, 95, 65, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+    overflow: hidden;
+    background: #e8e4df;
+    flex: 1;
+    min-height: 420px;
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.map-glass-frame:hover {
+    border-color: var(--color-gold-accent);
+    box-shadow: 0 14px 38px rgba(130, 95, 65, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+}
+
+.map-status-pill {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(207, 161, 92, 0.4);
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--color-heading);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    pointer-events: none;
+}
+
+.map-live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+}
+
+.google-map-iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    border: 0;
+    display: block;
+}
+
+.map-footer-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    padding: 0.35rem 0.5rem;
+}
+
+.hint-icon {
+    font-size: 0.95rem;
+}
+
+/* --------------------------------------------------------------------------
    21. RESPONSIVE DESIGN BREAKPOINTS
    -------------------------------------------------------------------------- */
 @media (min-width: 1201px) and (max-width: 1360px) {
@@ -2311,9 +2599,51 @@ section {
     .about-hero-grid {
         grid-template-columns: 1fr;
     }
+
+    .campus-map-grid {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
 }
 
 @media (max-width: 768px) {
+    .campus-map-card {
+        padding: 1.5rem 1.15rem;
+        margin-top: 1.5rem;
+    }
+
+    .campus-info-card {
+        padding: 1.25rem 1rem;
+    }
+
+    .map-glass-frame {
+        min-height: 350px;
+    }
+
+    .google-map-iframe {
+        min-height: 350px;
+    }
+
+    .detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .detail-value {
+        text-align: left;
+    }
+
+    .campus-action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .campus-action-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+
     .header-container {
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
@@ -2408,6 +2738,15 @@ section {
 }
 
 @media (max-width: 480px) {
+    .map-glass-frame,
+    .google-map-iframe {
+        min-height: 290px;
+    }
+
+    .map-heading-wrapper h2 {
+        font-size: 1.45rem !important;
+    }
+
     .header-container {
         padding-left: 0.65rem;
         padding-right: 0.65rem;

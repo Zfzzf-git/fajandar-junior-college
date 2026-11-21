@@ -152,15 +152,118 @@
                     </div>
                 </div>
 
-                <!-- Address & Google Map Placeholder Card -->
-                <div class="glass-card" style="padding: 2.25rem; margin-top: 2rem;">
-                    <span class="facility-tag">Campus Geo Location</span>
-                    <h3 style="margin-bottom: 0.75rem;">Official Campus Coordinates</h3>
-                    <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">
-                        <strong>Address:</strong> Fajandar Junior College, Vahoor, District: Raigad, Maharashtra, India.<br>
-                        [Latitude &amp; Longitude Coordinates / Map Embed — To Be Added]
-                    </p>
-                    <a href="contact.html" class="btn btn-primary">Contact Admissions Desk &rarr;</a>
+                <!-- Campus Location & Interactive Google Map Section -->
+                <div class="campus-map-card" id="campus-map-section">
+                    <header class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+                        <span class="facility-tag">Campus Geo Location</span>
+                        <div class="map-heading-wrapper">
+                            <span class="map-pin-icon-badge" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </span>
+                            <h2 style="margin: 0; font-family: var(--font-heading); font-size: 1.85rem; color: var(--color-heading);">Find Our Campus</h2>
+                        </div>
+                        <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-top: 0.5rem; margin-bottom: 0;">
+                            Situated in the tranquil, scenic landscape of Vahoor, Mahad. Plan your visit or navigate directly with step-by-step directions.
+                        </p>
+                    </header>
+
+                    <div class="campus-map-grid">
+                        <!-- Location Information Card -->
+                        <div class="campus-info-card">
+                            <div class="campus-info-header">
+                                <div class="campus-info-badge">
+                                    <span class="pulse-indicator" aria-hidden="true"></span>
+                                    <span>Verified College Location</span>
+                                </div>
+                                <h3 class="campus-institution-name">Fajandar High School &amp; Junior College</h3>
+                                <p class="campus-full-address">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="info-inline-icon" aria-hidden="true">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Fajandar High School &amp; Junior College, 39VF+RWF, Vahoor, Tal. Mahad, District Raigad, Maharashtra, India</span>
+                                </p>
+                            </div>
+
+                            <div class="location-details-list">
+                                <div class="detail-row">
+                                    <span class="detail-label">College Name</span>
+                                    <span class="detail-value">Fajandar High School &amp; Junior College</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Complete Address</span>
+                                    <span class="detail-value">Fajandar High School &amp; Junior College, 39VF+RWF, Vahoor, Tal. Mahad, District Raigad, Maharashtra, India</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Village</span>
+                                    <span class="detail-value">Vahoor</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Taluka</span>
+                                    <span class="detail-value">Mahad</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">District</span>
+                                    <span class="detail-value">Raigad</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">State</span>
+                                    <span class="detail-value">Maharashtra</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">PIN Code</span>
+                                    <span class="detail-value highlight-pin">402102</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Google Plus Code</span>
+                                    <span class="detail-value plus-code">39VF+RWF, Vahoor</span>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="campus-action-buttons">
+                                <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Fajandar+High+School+%26+Junior+College,+39VF%2BRWF,+Vahoor,+Tal.+Mahad,+District+Raigad,+Maharashtra,+India" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer" 
+                                   class="btn btn-primary btn-directions"
+                                   id="btn-get-directions"
+                                   aria-label="Get Directions to Fajandar Junior College on Google Maps (opens in new tab)">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+                                    </svg>
+                                    <span>Get Directions</span>
+                                </a>
+                                <a href="contact.html" class="btn btn-secondary" aria-label="Contact Admissions Desk">
+                                    <span>Contact Admissions Desk &rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Google Maps Container -->
+                        <div class="campus-map-embed-wrapper">
+                            <div class="map-glass-frame">
+                                <div class="map-status-pill">
+                                    <span class="map-live-dot" aria-hidden="true"></span>
+                                    <span>Interactive Campus Map</span>
+                                </div>
+                                <iframe 
+                                    src="https://maps.google.com/maps?q=Fajandar+High+School+%26+Junior+College,+39VF%2BRWF,+Vahoor,+Tal.+Mahad,+District+Raigad,+Maharashtra,+India&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed" 
+                                    class="google-map-iframe"
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade" 
+                                    title="Google Map showing Fajandar High School &amp; Junior College, Vahoor">
+                                </iframe>
+                            </div>
+                            <div class="map-footer-hint">
+                                <span class="hint-icon" aria-hidden="true">📍</span>
+                                <span>Tip: Use map controls to zoom and pan. Click 'Get Directions' to open turn-by-turn navigation in Google Maps.</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
