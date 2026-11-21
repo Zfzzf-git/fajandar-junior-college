@@ -14,4 +14,4 @@ Allow: /*.jpeg$
 Allow: /*.svg$
 Allow: /*.webp$
 
-Sitemap: https://zfzzf-git.github.io/Fajandar-Portfolio/sitemap.xml
+Sitemap: https://zfzzf-git.github.io/fajandar-junior-college/sitemap.xml
