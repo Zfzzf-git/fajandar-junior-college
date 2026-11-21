@@ -1,0 +1,17 @@
+﻿User-agent: *
+Allow: /
+
+# Google Searchbot and Image crawler permissions
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /*.ico$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.svg$
+Allow: /*.webp$
+
+Sitemap: https://zfzzf-git.github.io/Fajandar-Portfolio/sitemap.xml

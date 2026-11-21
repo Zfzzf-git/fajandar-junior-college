@@ -1,11 +1,21 @@
 {
-  "name": "Fajandar Junior College, Vahoor",
+  "name": "FAJANDAR JUNIOR COLLEGE, VAHOOR",
   "short_name": "Fajandar JC",
-  "description": "Official website of Fajandar Junior College, Vahoor, Raigad, Maharashtra.",
+  "description": "Explore Fajandar Junior College, Vahoor — a higher secondary institution offering Arts, Commerce and Science streams. Discover academics, faculty, facilities, campus information and more.",
   "icons": [
     {
       "src": "favicon-48x48.png",
       "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon-144x144.png",
+      "sizes": "144x144",
       "type": "image/png"
     },
     {
@@ -20,7 +30,7 @@
     }
   ],
   "theme_color": "#B85D19",
-  "background_color": "#0d1527",
+  "background_color": "#F8F2EC",
   "display": "standalone",
   "start_url": "./index.html"
 }
